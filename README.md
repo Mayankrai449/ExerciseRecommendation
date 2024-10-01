@@ -2,6 +2,8 @@
 
 This assignment provides an API endpoint to fetch the top N most frequent errors for a user based on their conversation history. It's designed to support an English learning platform where users receive feedback on Grammar, Vocabulary, Pronunciation, and Content/Fluency.
 
+Deployed: `https://exerciserecommendation.onrender.com/docs`
+
 ## Features
 
 - RESTful API endpoint `/generate-exercise` to fetch top errors
@@ -82,7 +84,7 @@ Start the API server:
 uvicorn app.main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`
+API Docs: `https://exerciserecommendation.onrender.com/docs`
 
 ## API Documentation
 
