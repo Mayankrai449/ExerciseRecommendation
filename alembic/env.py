@@ -17,20 +17,15 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-# from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-target_metadata = None
+from app.models import Base
+target_metadata = Base.metadata
 
-# other values from the config, defined by the needs of env.py,
-# can be acquired:
-# my_important_option = config.get_main_option("my_important_option")
-# ... etc.
+def get_url():
+    return os.getenv("DATABASE_URL")
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode."""
-    url = os.getenv("DATABASE_URL")
-    if url is None:
-        raise ValueError("DATABASE_URL environment variable is not set")
+    url = get_url()
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -43,12 +38,8 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
-    url = os.getenv("DATABASE_URL")
-    if url is None:
-        raise ValueError("DATABASE_URL environment variable is not set")
-    
     configuration = config.get_section(config.config_ini_section)
-    configuration["sqlalchemy.url"] = url
+    configuration["sqlalchemy.url"] = get_url()
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",

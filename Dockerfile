@@ -9,7 +9,6 @@ COPY . .
 
 EXPOSE 8000
 
-COPY startup.sh .
 RUN sed -i 's/\r$//' startup.sh && \
     chmod +x startup.sh
 
