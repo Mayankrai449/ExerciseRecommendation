@@ -13,7 +13,58 @@ Deployed: `https://exerciserecommendation.onrender.com/docs`
 - Frequency-based sorting of errors
 - Database migration support using Alembic
 
-## Getting Started
+## API Documentation
+
+### GET /generate-exercise
+
+Fetches the top N most frequent errors for a specific user.
+
+**Request**
+
+```
+GET /generate-exercise?user_id=1&limit=3
+```
+
+Parameters:
+- `user_id` (required): The ID of the user
+- `limit` (optional): Number of top errors to return (default: 10)
+
+**Response**
+
+```json
+[
+  {
+    "top_errors": [
+      {
+        "error_category": "Grammer",
+        "error_subcategory": "Adverb",
+        "error_frequency": 12
+      },
+      {
+        "error_category": "Grammer",
+        "error_subcategory": "Pronoun",
+        "error_frequency": 9
+      },
+      {
+        "error_category": "Pronunciation",
+        "error_subcategory": "MisPronounced_Syllable",
+        "error_frequency": 7
+      }
+    ]
+  }
+]
+```
+![Response](images/response.png)
+
+## Database Schema
+
+The API uses the following main tables:
+
+1. `users` - Stores user information
+2. `errors` - Stores error occurrences with categories, subcategories and frequencies
+
+
+## Project Setup
 
 ### Prerequisites
 
@@ -85,44 +136,4 @@ uvicorn app.main:app --reload
 ```
 
 API Docs: `https://exerciserecommendation.onrender.com/docs`
-
-## API Documentation
-
-### GET /generate-exercise
-
-Fetches the top N most frequent errors for a specific user.
-
-**Request**
-
-```
-GET /generate-exercise?user_id=1&limit=3
-```
-
-Parameters:
-- `user_id` (required): The ID of the user
-- `limit` (optional): Number of top errors to return (default: 10)
-
-**Response**
-
-```json
-[
-  {
-    "errorCategory": "Grammar",
-    "errorSubCategory": "Adverb",
-    "errorFrequency": 10
-  },
-  {
-    "errorCategory": "Pronunciation",
-    "errorSubCategory": "MisPronounced_Syllable",
-    "errorFrequency": 8
-  }
-]
-```
-
-## Database Schema
-
-The API uses the following main tables:
-
-1. `users` - Stores user information
-2. `errors` - Stores error occurrences with categories, subcategories and frequencies
 
