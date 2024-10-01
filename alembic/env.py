@@ -21,11 +21,8 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-try:
-    from app.db.models import Base
-    target_metadata = Base.metadata
-except ImportError:
-    target_metadata = None
+from app.models import Base
+target_metadata = Base.metadata
 
 def get_url():
     return os.getenv("DATABASE_URL")

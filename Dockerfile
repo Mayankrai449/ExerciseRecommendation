@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN mkdir -p /app/alembic/versions
+RUN mkdir -p /app/alembic/versions && chmod 777 /app/alembic/versions
 
 EXPOSE 8000
 
