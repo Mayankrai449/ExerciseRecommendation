@@ -7,6 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+RUN mkdir -p /app/alembic/versions
+
 EXPOSE 8000
 
 RUN sed -i 's/\r$//' startup.sh && \

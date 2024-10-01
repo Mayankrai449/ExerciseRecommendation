@@ -152,6 +152,8 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Do not ignore Alembic versions
+!alembic/versions/*.py
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
