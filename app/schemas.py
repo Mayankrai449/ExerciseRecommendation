@@ -26,3 +26,12 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+        
+class ErrorOut(BaseModel):
+    error_category: str
+    error_subcategory: str
+    error_frequency: int
+
+    model_config = {
+        'from_attributes': True
+    }

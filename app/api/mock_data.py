@@ -6,7 +6,7 @@ from app.schemas import *
 
 router = APIRouter()
 
-@router.post("/add_mock/", response_model=UserResponse)
+@router.post("/add-mock/", response_model=UserResponse)
 def add_user_with_errors(user_data: UserWithErrors, db: Session = Depends(get_db)):
     try:
         user = db.query(User).filter(User.username == user_data.username).first()
