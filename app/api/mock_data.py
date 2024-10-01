@@ -18,13 +18,22 @@ def add_user_with_errors(user_data: UserWithErrors, db: Session = Depends(get_db
             db.refresh(user)
 
         for error_data in user_data.errors:
-            error = Error(
-                user_id=user.id,
-                error_category=error_data.error_category,
-                error_subcategory=error_data.error_subcategory,
-                error_frequency=error_data.error_frequency
-            )
-            db.add(error)
+            existing_error = db.query(Error).filter(
+                Error.user_id == user.id,
+                Error.error_category == error_data.error_category,
+                Error.error_subcategory == error_data.error_subcategory
+            ).first()
+
+            if existing_error:
+                existing_error.error_frequency += error_data.error_frequency
+            else:
+                new_error = Error(
+                    user_id=user.id,
+                    error_category=error_data.error_category,
+                    error_subcategory=error_data.error_subcategory,
+                    error_frequency=error_data.error_frequency
+                )
+                db.add(new_error)
         
         db.commit()
         db.refresh(user)

@@ -8,13 +8,13 @@ from typing import List, Dict
 router = APIRouter()
 
 @router.get("/generate-exercise", response_model=List[Dict[str, List[ErrorOut]]])
-def generate_exercise(user_id: int, n: int = 3, db: Session = Depends(get_db)):
+def generate_exercise(user_id: int, limit: int = 3, db: Session = Depends(get_db)):
     
     user = db.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found.")
     
-    errors = db.query(Error).filter(Error.user_id == user_id).order_by(Error.error_frequency.desc()).limit(n).all()
+    errors = db.query(Error).filter(Error.user_id == user_id).order_by(Error.error_frequency.desc()).limit(limit).all()
 
     if not errors:
         raise HTTPException(status_code=404, detail="No errors found for this user.")
