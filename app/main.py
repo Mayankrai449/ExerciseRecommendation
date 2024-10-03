@@ -3,7 +3,7 @@ from app.api import mock_data, exercise
 
 app = FastAPI()
 
-@app.get("/health")
+@app.get("/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok"}
 
